@@ -17,24 +17,25 @@ function getComputerChoice() {
 function convertToWord(letter) {
     if (letter === "r") return "Rock";
     if (letter === "p") return "Paper";
-    return "Scissors";
+    if (letter === "s") return "Scissors";
 }
 
 function win(playerChoice, computerChoice) {
     playerScore++;
     playerScore_span.innerHTML = playerScore;
     computerScore_span.innerHTML = computerScore;
-    result_p.innerHTML = `${convertToWord(playerChoice)} beats ${convertToWord(computerChoice)}.`;
+    result_p.innerHTML = `You win! ${convertToWord(playerChoice)} beats ${convertToWord(computerChoice)}.`;
 }
 
-function lose() {
+function lose(computerChoice, playerChoice) {
     computerScore++;
     computerScore_span.innerHTML = computerScore;
     playerScore_span.innerHTML = playerScore;
+    result_p.innerHTML = `Computer wins! ${convertToWord(computerChoice)} beats ${convertToWord(playerChoice)}.`;
 }
 
-function tie() {
-    console.log("It's a tie!");
+function tie(playerChoice, computerChoice) {
+    result_p.innerHTML = `It's a tie, try again!`;
 }
 
 function game(playerChoice) {
@@ -43,17 +44,17 @@ function game(playerChoice) {
         case "rs":
         case "pr":
         case "sp":
-            win();
+            win(playerChoice, computerChoice);
             break;
         case "rp":
         case "ps":
         case "sr":
-            lose();
+            lose(computerChoice, playerChoice);
             break;
         case "rr":
         case "pp":
         case "ss":
-            tie();
+            tie(playerChoice, computerChoice);
             break;
     }
 }
